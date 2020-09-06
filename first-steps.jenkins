@@ -1,0 +1,20 @@
+#!groovy
+// Check ub1 properties
+properties([disableConcurrentBuilds()]) // запретить параллельные сборки...
+
+pipeline {
+  agent {
+    label 'master' // агент выбирается по метке мастер, т.е. запусается на jenkins master
+  }
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10')) // Хранить логи и артифакты последних 10-ти сборок
+    timestamps() // в выводе сборки в графическом интерфейсе показываются временные отметки
+  }
+  stages {
+    stage("First stage") {
+      steps {
+        sh 'ssh root@ub1 \'hostname\''
+      }
+    }
+  }
+}

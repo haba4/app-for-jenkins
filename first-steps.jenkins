@@ -16,5 +16,18 @@ pipeline {
         sh 'ssh root@ub1 \'hostname\''
       }
     }
+    stage("Second stage") {
+      steps {
+        sh 'ssh root@ub1 \'whoami\''
+      }
+    }
+    stage("Third stage") {
+      steps {
+        sh '''
+          ssh root@ub1 \'uptime\'
+          echo "message from third stage"
+        '''
+      }
+    }    
   }
 }

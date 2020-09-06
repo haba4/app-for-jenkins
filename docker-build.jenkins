@@ -6,6 +6,7 @@ pipeline {
   agent {
     label 'master' // агент выбирается по метке мастер, т.е. запусается на jenkins master
   }
+  triggers { pollSCM('*****') }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10')) // Хранить логи и артифакты последних 10-ти сборок
     timestamps() // в выводе сборки в графическом интерфейсе показываются временные отметки

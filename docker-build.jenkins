@@ -28,6 +28,12 @@ pipeline {
         }
         echo "==================== finish building image ===================="
       }
-    }   
+    }
+    stage("Docker push") {
+      steps {
+        echo "==================== start pushing image ===================="
+        sh 'docker push haba4/toolbox:latest'
+      }
+    }    
   }
 }

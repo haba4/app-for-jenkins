@@ -12,6 +12,13 @@ pipeline {
     timestamps() // в выводе сборки в графическом интерфейсе показываются временные отметки
   }
   stages {
+    stage("Docker login") {
+      steps {
+        echo "==================== docker login ===================="
+        withCredentials([usernamePassword(credentialsId: 'dockerhub_haba4', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')])
+        sh 'docker login -u $USERNAME -p $PASSWORD'
+      }
+    }
     stage("Create docker image") {
       steps {
         echo "==================== start building image ===================="
